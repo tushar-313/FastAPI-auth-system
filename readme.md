@@ -8,16 +8,30 @@
 
 A production-ready authentication REST API built with FastAPI and PostgreSQL.
 
+## 🌐 Live Demo
+
+    https://fastapi-auth-system-btg6.onrender.com/docs
+
 ## ✨ Features
 
-- 📧 **Register** — Email + password with bcrypt hashing
-- ✅ **Email OTP Verification** — 6-digit OTP via Resend, 10 min expiry
-- 🔑 **Login** — JWT tokens stored in HttpOnly cookies
-- 🔄 **Refresh Token** — Automatic token rotation
+- 📧 **Register** — Email + password registration with bcrypt hashing
+- ✅ **Email OTP Verification** — 6-digit OTP via Gmail API, 10 min expiry
+- 🔑 **Login** — JWT access + refresh tokens stored in HttpOnly cookies
+- 🔄 **Refresh Token** — Automatic token rotation for security
 - 🔒 **Forgot Password** — OTP-based password reset via email
 - 🚪 **Logout** — Secure cookie clearance
 - 🌐 **Google OAuth** — Login with Google
 - 👤 **Protected Routes** — JWT verification via HttpOnly cookies
+
+## 🔒 Security
+
+- Passwords hashed with **bcrypt**
+- Tokens stored in **HttpOnly cookies** — XSS safe
+- **SameSite=Strict** — CSRF protection
+- **Secure flag** — HTTPS only in production
+- OTP expires in **10 minutes**
+- **Token rotation** on every refresh
+- Gmail API with OAuth 2.0 — no plain passwords
 
 ## 🛠️ Tech Stack
 
@@ -27,8 +41,9 @@ A production-ready authentication REST API built with FastAPI and PostgreSQL.
 | Database | PostgreSQL 16 |
 | ORM | SQLAlchemy + Alembic |
 | Auth | JWT (python-jose) + bcrypt |
-| Email | Resend |
+| Email | Gmail API (OAuth 2.0) |
 | Container | Docker + Docker Compose |
+| Deployment | Render |
 
 ## 📁 Project Structure
 
@@ -55,20 +70,22 @@ A production-ready authentication REST API built with FastAPI and PostgreSQL.
 
 **1. Clone the repo:**
 
-    git clone https://github.com/tushar-313/auth-project
-    cd auth-project
+    git clone https://github.com/tushar-313/FastAPI-auth-system
+    cd FastAPI-auth-system
 
-**2. Create `.env` file in `backend/`:**
+**2. Create .env file in backend/:**
 
     DATABASE_URL=postgresql://postgres:postgres123@postgres:5432/authproject
     SECRET_KEY=your-secret-key
     ALGORITHM=HS256
     ACCESS_TOKEN_EXPIRE_MINUTES=30
     REFRESH_TOKEN_EXPIRE_DAYS=7
-    RESEND_API_KEY=your-resend-api-key
+    GMAIL_USER=your-gmail@gmail.com
+    GMAIL_REFRESH_TOKEN=your-refresh-token
     GOOGLE_CLIENT_ID=your-google-client-id
     GOOGLE_CLIENT_SECRET=your-google-client-secret
     GOOGLE_REDIRECT_URI=http://localhost:8000/auth/google/callback
+    ENVIRONMENT=development
 
 **3. Start with Docker:**
 
@@ -98,15 +115,6 @@ A production-ready authentication REST API built with FastAPI and PostgreSQL.
 | GET | `/auth/me` | Get current user | ✅ |
 | GET | `/health` | Health check | ❌ |
 
-## 🔒 Security Features
-
-- Passwords hashed with **bcrypt**
-- Tokens stored in **HttpOnly cookies** — XSS safe
-- **SameSite=Strict** — CSRF protection
-- **Secure flag** — HTTPS only in production
-- OTP expires in **10 minutes**
-- **Token rotation** on every refresh
-
 ## 🌍 Environment Variables
 
 | Variable | Description |
@@ -116,7 +124,9 @@ A production-ready authentication REST API built with FastAPI and PostgreSQL.
 | `ALGORITHM` | JWT algorithm (HS256) |
 | `ACCESS_TOKEN_EXPIRE_MINUTES` | Access token expiry |
 | `REFRESH_TOKEN_EXPIRE_DAYS` | Refresh token expiry |
-| `RESEND_API_KEY` | Resend email service key |
+| `GMAIL_USER` | Gmail address for sending emails |
+| `GMAIL_REFRESH_TOKEN` | Gmail OAuth 2.0 refresh token |
 | `GOOGLE_CLIENT_ID` | Google OAuth client ID |
 | `GOOGLE_CLIENT_SECRET` | Google OAuth client secret |
 | `GOOGLE_REDIRECT_URI` | Google OAuth redirect URI |
+| `ENVIRONMENT` | development or production |
