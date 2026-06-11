@@ -85,7 +85,7 @@ A production-ready authentication REST API built with FastAPI and PostgreSQL.
     GOOGLE_CLIENT_ID=your-google-client-id
     GOOGLE_CLIENT_SECRET=your-google-client-secret
     GOOGLE_REDIRECT_URI=http://localhost:8000/auth/google/callback
-    ENVIRONMENT=development
+
 
 **3. Start with Docker:**
 
@@ -129,4 +129,3 @@ A production-ready authentication REST API built with FastAPI and PostgreSQL.
 | `GOOGLE_CLIENT_ID` | Google OAuth client ID |
 | `GOOGLE_CLIENT_SECRET` | Google OAuth client secret |
 | `GOOGLE_REDIRECT_URI` | Google OAuth redirect URI |
-| `ENVIRONMENT` | development or production |
