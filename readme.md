@@ -10,7 +10,7 @@ A production-ready authentication REST API built with FastAPI and PostgreSQL.
 
 ## 🌐 Live Demo
 
-    https://fastapi-auth-system-btg6.onrender.com/docs
+https://fastapi-auth-system-btg6.onrender.com/docs
 
 ## ✨ Features
 
